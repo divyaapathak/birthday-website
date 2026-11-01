@@ -1,18 +1,25 @@
 
-
 const $ = (id) => document.getElementById(id);
 
 let currentScreen = 1;
 let candlesBlown = false;
 let letterOpened = false;
 let musicOn = false;
-let audioContext = null;
-let musicOscillators = [];
-let musicTimer = null;
 let connectedStars = [];
 let doorOpened = false;
 let floatyTimer = null;
 let currentMemory = 0;
+
+/* BIRTHDAY MUSIC */
+const birthdaySong = new Audio("music/birthday.mp3.mp3");
+birthdaySong.loop = true;
+birthdaySong.volume = 0.5;
+
+birthdaySong.addEventListener("ended", () => {
+  musicOn = false;
+  const button = $("musicBtn");
+  if (button) button.textContent = "♫ Play music";
+});
 
 /* MEMORY PHOTOS */
 const memories = [
@@ -62,27 +69,20 @@ function createFloaty() {
   if (!container) return;
 
   const symbols = ["♡", "✦", "✨", "🌸", "💗", "⋆"];
-
   const item = document.createElement("span");
 
   item.className = "floaty";
-  item.textContent =
-    symbols[Math.floor(Math.random() * symbols.length)];
-
+  item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
   item.style.left = Math.random() * 100 + "%";
   item.style.fontSize = (12 + Math.random() * 22) + "px";
   item.style.animationDuration = (8 + Math.random() * 9) + "s";
 
   container.appendChild(item);
-
   setTimeout(() => item.remove(), 18000);
 }
 
 function startFloaties() {
-  if (floatyTimer) {
-    clearInterval(floatyTimer);
-  }
-
+  if (floatyTimer) clearInterval(floatyTimer);
   floatyTimer = setInterval(createFloaty, 650);
 }
 
@@ -95,17 +95,12 @@ function hearts() {
     const heart = document.createElement("span");
 
     heart.className = "floaty";
-
-    heart.textContent = ["💗", "💕", "♡", "💖"][
-      Math.floor(Math.random() * 4)
-    ];
-
+    heart.textContent = ["💗", "💕", "♡", "💖"][Math.floor(Math.random() * 4)];
     heart.style.left = (20 + Math.random() * 60) + "%";
     heart.style.fontSize = (18 + Math.random() * 20) + "px";
     heart.style.animationDuration = (3 + Math.random() * 3) + "s";
 
     container.appendChild(heart);
-
     setTimeout(() => heart.remove(), 7000);
   }
 }
@@ -124,7 +119,6 @@ function resizeConfetti() {
 
   canvas.width = window.innerWidth * ratio;
   canvas.height = window.innerHeight * ratio;
-
   canvas.style.width = window.innerWidth + "px";
   canvas.style.height = window.innerHeight + "px";
 
@@ -138,12 +132,8 @@ function confettiBurst(amount = 100) {
   if (!canvas || !ctx) return;
 
   const colors = [
-    "#f4a2c0",
-    "#d96e9b",
-    "#b7a5f6",
-    "#ffe6a7",
-    "#ffffff",
-    "#e6b5ff"
+    "#f4a2c0", "#d96e9b", "#b7a5f6",
+    "#ffe6a7", "#ffffff", "#e6b5ff"
   ];
 
   for (let i = 0; i < amount; i++) {
@@ -160,24 +150,14 @@ function confettiBurst(amount = 100) {
     });
   }
 
-  if (!confettiAnimation) {
-    animateConfetti();
-  }
+  if (!confettiAnimation) animateConfetti();
 }
 
 function animateConfetti() {
   if (!ctx || !canvas) return;
 
-  ctx.clearRect(
-    0,
-    0,
-    window.innerWidth,
-    window.innerHeight
-  );
-
-  confettiPieces = confettiPieces.filter(
-    piece => piece.life > 0
-  );
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  confettiPieces = confettiPieces.filter(piece => piece.life > 0);
 
   confettiPieces.forEach(piece => {
     piece.x += piece.vx;
@@ -187,32 +167,17 @@ function animateConfetti() {
     piece.life--;
 
     ctx.save();
-
     ctx.translate(piece.x, piece.y);
     ctx.rotate(piece.rotation * Math.PI / 180);
-
     ctx.fillStyle = piece.color;
-
-    ctx.fillRect(
-      -piece.size / 2,
-      -piece.size / 2,
-      piece.size,
-      piece.size * 1.5
-    );
-
+    ctx.fillRect(-piece.size / 2, -piece.size / 2, piece.size, piece.size * 1.5);
     ctx.restore();
   });
 
   if (confettiPieces.length > 0) {
     confettiAnimation = requestAnimationFrame(animateConfetti);
   } else {
-    ctx.clearRect(
-      0,
-      0,
-      window.innerWidth,
-      window.innerHeight
-    );
-
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     confettiAnimation = null;
   }
 }
@@ -225,8 +190,6 @@ function celebrate() {
 
 /* CAKE AND CANDLES */
 function blowCandles() {
-
-  // If candles are already blown, continue to next screen
   if (candlesBlown) {
     go(3);
     return;
@@ -240,31 +203,15 @@ function blowCandles() {
   const button = $("blowBtn");
   const birthdayReveal = $("birthdayReveal");
 
-  // Turn off candle flames
-  if (cake) {
-    cake.classList.add("cake-blown");
-  }
+  if (cake) cake.classList.add("cake-blown");
+  if (instruction) instruction.classList.add("hidden");
 
-  // Hide initial instruction
-  if (instruction) {
-    instruction.classList.add("hidden");
-  }
-
-  // Show new wish message
   if (hint) {
-    hint.textContent =
-      "Wish made! May all your dreams come true. ✨🦋🌙";
+    hint.textContent = "Wish made! May all your dreams come true. ✨🦋🌙";
   }
 
-  // Reveal birthday surprise
-  if (birthdayReveal) {
-    birthdayReveal.classList.remove("hidden");
-  }
-
-  // Change button text
-  if (button) {
-    button.textContent = "Continue to the surprise 🎉";
-  }
+  if (birthdayReveal) birthdayReveal.classList.remove("hidden");
+  if (button) button.textContent = "Continue to the surprise 🎉";
 
   confettiBurst(130);
   hearts();
@@ -291,19 +238,15 @@ function openLetter() {
   if (!envelope || !content || !textElement) return;
 
   letterOpened = true;
-
   envelope.classList.add("open");
   content.classList.remove("hidden");
-
   textElement.textContent = "";
 
   let index = 0;
 
   function typeLetter() {
     if (index < letterMessage.length) {
-      textElement.textContent += letterMessage.charAt(index);
-      index++;
-
+      textElement.textContent += letterMessage.charAt(index++);
       setTimeout(typeLetter, 24);
     }
   }
@@ -316,20 +259,15 @@ async function copyLetter() {
   try {
     await navigator.clipboard.writeText(letterMessage);
     alert("Birthday letter copied! 💌");
-
   } catch (error) {
-
     const textarea = document.createElement("textarea");
-
     textarea.value = letterMessage;
     document.body.appendChild(textarea);
-
     textarea.select();
 
     try {
       document.execCommand("copy");
       alert("Birthday letter copied! 💌");
-
     } catch (copyError) {
       alert("Please select and copy the message manually. 💗");
     }
@@ -342,20 +280,15 @@ async function copyLetter() {
 const gifts = {
   1: {
     title: "A pocket full of happiness! 🌸",
-    message:
-      "May every day give you a reason to smile, laugh and feel loved. You deserve all the beautiful things in life. 💗"
+    message: "May every day give you a reason to smile, laugh and feel loved. You deserve all the beautiful things in life. 💗"
   },
-
   2: {
     title: "A little bundle of luck! 🍀",
-    message:
-      "May new opportunities find you, your hard work pay off and your dreams turn into beautiful realities. ✨"
+    message: "May new opportunities find you, your hard work pay off and your dreams turn into beautiful realities. ✨"
   },
-
   3: {
     title: "Unlimited hugs & love! 🧸",
-    message:
-      "Sending you the biggest virtual hug, lots of warmth and a lifetime of wonderful birthday memories. Happy Birthday! 💕"
+    message: "Sending you the biggest virtual hug, lots of warmth and a lifetime of wonderful birthday memories. Happy Birthday! 💕"
   }
 };
 
@@ -375,7 +308,6 @@ function openGift(number) {
   paragraph.textContent = gift.message;
 
   result.append(heading, paragraph);
-
   confettiBurst(35);
   hearts();
 }
@@ -385,157 +317,52 @@ function toggleNight() {
   document.body.classList.toggle("night");
 
   const isNight = document.body.classList.contains("night");
-
-  const nightButton = document.querySelector(
-    'button[onclick="toggleNight()"]'
-  );
+  const nightButton = document.querySelector('button[onclick="toggleNight()"]');
 
   if (nightButton) {
-    nightButton.textContent = isNight
-      ? "☀️ Day mode"
-      : "🌙 Night mode";
+    nightButton.textContent = isNight ? "☀️ Day mode" : "🌙 Night mode";
   }
 }
 
-/* MUSIC */
-function getAudioContext() {
-  if (!audioContext) {
-    const AudioContextClass =
-      window.AudioContext || window.webkitAudioContext;
+/* MUSIC CONTROLS */
+async function toggleMusic() {
+  const button = $("musicBtn");
 
-    if (AudioContextClass) {
-      audioContext = new AudioContextClass();
-    }
+  if (musicOn) {
+    birthdaySong.pause();
+    musicOn = false;
+    if (button) button.textContent = "♫ Play music";
+    return;
   }
 
-  return audioContext;
+  try {
+    await birthdaySong.play();
+    musicOn = true;
+    if (button) button.textContent = "♫ Stop music";
+  } catch (error) {
+    alert("Music play nahi ho paaya. Please check birthday.mp3 file.");
+  }
 }
 
 function stopMusic() {
-  if (musicTimer) {
-    clearTimeout(musicTimer);
-    musicTimer = null;
-  }
-
-  musicOscillators.forEach(oscillator => {
-    try {
-      oscillator.stop();
-    } catch (error) {
-      // Oscillator may already be stopped.
-    }
-  });
-
-  musicOscillators = [];
+  birthdaySong.pause();
+  birthdaySong.currentTime = 0;
   musicOn = false;
 
   const button = $("musicBtn");
-
-  if (button) {
-    button.textContent = "♫ Play music";
-  }
-}
-
-function toggleMusic() {
-  const audio = getAudioContext();
-
-  if (!audio) {
-    alert("Your browser does not support Web Audio.");
-    return;
-  }
-
-  if (musicOn) {
-    stopMusic();
-    return;
-  }
-
-  audio.resume();
-
-  musicOn = true;
-
-  const button = $("musicBtn");
-
-  if (button) {
-    button.textContent = "♫ Stop music";
-  }
-
-  const notes = [
-    261.63,
-    329.63,
-    392.00,
-    329.63,
-    293.66,
-    349.23
-  ];
-
-  notes.forEach((frequency, index) => {
-    const oscillator = audio.createOscillator();
-    const gain = audio.createGain();
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = frequency;
-    gain.gain.value = 0.018;
-
-    oscillator.connect(gain);
-    gain.connect(audio.destination);
-
-    const start = audio.currentTime + index * 0.8;
-
-    oscillator.start(start);
-    oscillator.stop(start + 0.7);
-
-    musicOscillators.push(oscillator);
-  });
-
-  musicTimer = setTimeout(() => {
-    if (musicOn) {
-      stopMusic();
-    }
-  }, 5500);
+  if (button) button.textContent = "♫ Play music";
 }
 
 function playBirthdayChime() {
-  const audio = getAudioContext();
-
-  if (!audio) return;
-
-  audio.resume();
-
-  const notes = [
-    523.25,
-    659.25,
-    783.99,
-    1046.5
-  ];
-
-  notes.forEach((frequency, index) => {
-    const oscillator = audio.createOscillator();
-    const gain = audio.createGain();
-
-    const start = audio.currentTime + index * 0.16;
-
-    oscillator.type = "sine";
-    oscillator.frequency.value = frequency;
-
-    gain.gain.setValueAtTime(0.0001, start);
-    gain.gain.exponentialRampToValueAtTime(0.12, start + 0.03);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.5);
-
-    oscillator.connect(gain);
-    gain.connect(audio.destination);
-
-    oscillator.start(start);
-    oscillator.stop(start + 0.55);
-  });
+  // No extra generated sound; birthday music is controlled by the music button.
 }
 
 /* HIDDEN ORB */
 function revealOrb() {
   const message = $("orbMessage");
-
   if (!message) return;
 
   message.classList.add("show");
-
   confettiBurst(90);
   hearts();
   playBirthdayChime();
@@ -564,27 +391,19 @@ function showMemory() {
   setTimeout(() => {
     photo.src = memory.image;
     photo.alt = "Birthday memory " + (currentMemory + 1);
-
     caption.textContent = memory.caption;
-
-    counter.textContent =
-      (currentMemory + 1) + " / " + memories.length;
-
+    counter.textContent = (currentMemory + 1) + " / " + memories.length;
     photo.style.opacity = "1";
   }, 150);
 }
 
 function nextMemory() {
-  currentMemory =
-    (currentMemory + 1) % memories.length;
-
+  currentMemory = (currentMemory + 1) % memories.length;
   showMemory();
 }
 
 function previousMemory() {
-  currentMemory =
-    (currentMemory - 1 + memories.length) % memories.length;
-
+  currentMemory = (currentMemory - 1 + memories.length) % memories.length;
   showMemory();
 }
 
@@ -602,27 +421,18 @@ function connectStar(index) {
 
   if (index !== connectedStars.length) {
     if ($("starHint")) {
-      $("starHint").textContent =
-        "Stars ko 1, 2, 3, 4, 5 ke order mein tap karo! ⭐";
+      $("starHint").textContent = "Stars ko 1, 2, 3, 4, 5 ke order mein tap karo! ⭐";
     }
-
     return;
   }
 
   connectedStars.push(index);
 
-  const star = document.querySelector(
-    `#starField [data-star="${index}"]`
-  );
-
-  if (star) {
-    star.classList.add("connected");
-  }
+  const star = document.querySelector(`#starField [data-star="${index}"]`);
+  if (star) star.classList.add("connected");
 
   const points = connectedStars
-    .map(i => {
-      return `${starPositions[i][0]},${starPositions[i][1]}`;
-    })
+    .map(i => `${starPositions[i][0]},${starPositions[i][1]}`)
     .join(" ");
 
   if ($("constellationLine")) {
@@ -630,19 +440,12 @@ function connectStar(index) {
   }
 
   if ($("starHint")) {
-    $("starHint").textContent =
-      `${connectedStars.length} / 5 stars connected ⭐`;
+    $("starHint").textContent = `${connectedStars.length} / 5 stars connected ⭐`;
   }
 
   if (connectedStars.length === 5) {
-    if ($("starHint")) {
-      $("starHint").textContent =
-        "You made the letter A! ✨";
-    }
-
-    if ($("wishMessage")) {
-      $("wishMessage").classList.add("show");
-    }
+    if ($("starHint")) $("starHint").textContent = "You made the letter A! ✨";
+    if ($("wishMessage")) $("wishMessage").classList.add("show");
 
     confettiBurst(100);
     hearts();
@@ -657,20 +460,12 @@ function resetStars() {
     $("constellationLine").setAttribute("points", "");
   }
 
-  document.querySelectorAll(
-    "#starField .star-point"
-  ).forEach(star => {
+  document.querySelectorAll("#starField .star-point").forEach(star => {
     star.classList.remove("connected");
   });
 
-  if ($("wishMessage")) {
-    $("wishMessage").classList.remove("show");
-  }
-
-  if ($("starHint")) {
-    $("starHint").textContent =
-      "0 / 5 stars connected ⭐";
-  }
+  if ($("wishMessage")) $("wishMessage").classList.remove("show");
+  if ($("starHint")) $("starHint").textContent = "0 / 5 stars connected ⭐";
 }
 
 /* MYSTERY DOOR */
@@ -679,28 +474,16 @@ function openMysteryDoor() {
 
   doorOpened = true;
 
-  if ($("mysteryDoor")) {
-    $("mysteryDoor").classList.add("open");
-  }
-
-  if ($("doorLight")) {
-    $("doorLight").classList.add("show");
-  }
-
-  if ($("doorHint")) {
-    $("doorHint").textContent =
-      "A little magic is coming your way... ✨";
-  }
+  if ($("mysteryDoor")) $("mysteryDoor").classList.add("open");
+  if ($("doorLight")) $("doorLight").classList.add("show");
+  if ($("doorHint")) $("doorHint").textContent = "A little magic is coming your way... ✨";
 
   setTimeout(() => {
-    if ($("doorMessage")) {
-      $("doorMessage").classList.add("show");
-    }
+    if ($("doorMessage")) $("doorMessage").classList.add("show");
 
     confettiBurst(150);
     hearts();
     playBirthdayChime();
-
   }, 850);
 }
 
@@ -719,19 +502,51 @@ function revealSurprise() {
   playBirthdayChime();
 }
 
+/* LANTERN WISH */
+function releaseWish() {
+  const wish = $("lanternWish");
+  if (wish) wish.classList.add("show");
+
+  const button = document.querySelector("#s6 .lantern-btn");
+
+  if (button) {
+    button.textContent = "Wish Released 💗";
+    button.disabled = true;
+  }
+
+  document.querySelectorAll("#s6 .lantern").forEach((lantern, index) => {
+    lantern.style.animationDuration = (4 + index) + "s";
+    lantern.style.transform = "translateY(-80px)";
+  });
+}
+
+hearts();
+function revealChildhood() {
+  const memory = $("childhoodMemory");
+  const button = document.querySelector('#s12 button[onclick="revealChildhood()"]');
+
+  if (!memory || !memory.classList.contains("hidden")) return;
+
+  memory.classList.remove("hidden");
+
+  if (button) {
+    button.textContent = "Surprise Unlocked! 💖✨";
+    button.disabled = true;
+  }
+
+  confettiBurst(120);
+  hearts();
+}
 /* GRAND FINALE */
 function grandFinale() {
   confettiBurst(240);
   hearts();
   playBirthdayChime();
 
-  const button = document.querySelector(
-    '#s7 button[onclick="grandFinale()"]'
-  );
+  const button = document.querySelector('#s7 button[onclick="grandFinale()"]');
 
   if (button) {
-    button.textContent =
-      "You're loved! Happy Birthday 💗";
+    button.textContent = "You're loved! Happy Birthday 💗";
   }
 }
 
@@ -742,109 +557,51 @@ function restart() {
   doorOpened = false;
   currentMemory = 0;
 
-  // Reset cake
   const cake = document.querySelector("#s2 .cake");
+  if (cake) cake.classList.remove("cake-blown");
 
-  if (cake) {
-    cake.classList.remove("cake-blown");
-  }
-
-  // Reset candle instruction
-  const instruction =
-    $("wishInstruction") || $("wishPrompt");
-
-  if (instruction) {
-    instruction.classList.remove("hidden");
-  }
+  const instruction = $("wishInstruction") || $("wishPrompt");
+  if (instruction) instruction.classList.remove("hidden");
 
   if ($("candleHint")) {
-    $("candleHint").textContent =
-      "🕯️ Candles jal rahi hain... wish maango!";
+    $("candleHint").textContent = "🕯️ Candles jal rahi hain... wish maango!";
   }
 
-  if ($("blowBtn")) {
-    $("blowBtn").textContent =
-      "Blow the candles 🌬️";
-  }
+  if ($("blowBtn")) $("blowBtn").textContent = "Blow the candles 🌬️";
+  if ($("birthdayReveal")) $("birthdayReveal").classList.add("hidden");
 
-  // Reset birthday reveal
-  if ($("birthdayReveal")) {
-    $("birthdayReveal").classList.add("hidden");
-  }
+  if ($("envelope")) $("envelope").classList.remove("open");
+  if ($("letterContent")) $("letterContent").classList.add("hidden");
+  if ($("letterText")) $("letterText").textContent = "";
 
-  // Reset letter
-  if ($("envelope")) {
-    $("envelope").classList.remove("open");
-  }
-
-  if ($("letterContent")) {
-    $("letterContent").classList.add("hidden");
-  }
-
-  if ($("letterText")) {
-    $("letterText").textContent = "";
-  }
-
-  // Reset gifts
   if ($("giftResult")) {
-    $("giftResult").textContent =
-      "Ek gift select karo... andar kya hai? ✨";
+    $("giftResult").textContent = "Ek gift select karo... andar kya hai? ✨";
   }
 
-  // Reset orb
-  if ($("orbMessage")) {
-    $("orbMessage").classList.remove("show");
-  }
+  if ($("orbMessage")) $("orbMessage").classList.remove("show");
+  if ($("surpriseMessage")) $("surpriseMessage").classList.add("hidden");
+  if ($("surpriseButton")) $("surpriseButton").style.display = "";
 
-  // Reset surprise
-  if ($("surpriseMessage")) {
-    $("surpriseMessage").classList.add("hidden");
-  }
-
-  if ($("surpriseButton")) {
-    $("surpriseButton").style.display = "";
-  }
-
-  // Reset mystery door
-  if ($("mysteryDoor")) {
-    $("mysteryDoor").classList.remove("open");
-  }
-
-  if ($("doorLight")) {
-    $("doorLight").classList.remove("show");
-  }
-
-  if ($("doorMessage")) {
-    $("doorMessage").classList.remove("show");
-  }
+  if ($("mysteryDoor")) $("mysteryDoor").classList.remove("open");
+  if ($("doorLight")) $("doorLight").classList.remove("show");
+  if ($("doorMessage")) $("doorMessage").classList.remove("show");
 
   if ($("doorHint")) {
-    $("doorHint").textContent =
-      "Knock knock... who's there? 💗";
+    $("doorHint").textContent = "Knock knock... who's there? 💗";
   }
 
-  // Reset finale button
-  const finaleButton = document.querySelector(
-    '#s7 button[onclick="grandFinale()"]'
-  );
+  const finaleButton = document.querySelector('#s7 button[onclick="grandFinale()"]');
+  if (finaleButton) finaleButton.textContent = "Make this moment magical ✨";
 
-  if (finaleButton) {
-    finaleButton.textContent =
-      "Make this moment magical ✨";
+  /* RESET CHILDHOOD SURPRISE */
+  if ($("childhoodMemory")) {
+    $("childhoodMemory").classList.add("hidden");
   }
 
-  // Stop music
-  if (musicOn) {
-    stopMusic();
-  }
-
-  // Reset stars
+  stopMusic();
   resetStars();
-
-  // Reset memories
   showMemory();
 
-  // Clear confetti
   confettiPieces = [];
 
   if (confettiAnimation) {
@@ -853,47 +610,38 @@ function restart() {
   }
 
   if (ctx && canvas) {
-    ctx.clearRect(
-      0,
-      0,
-      window.innerWidth,
-      window.innerHeight
-    );
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
   }
 
-  // Reset night mode
   document.body.classList.remove("night");
 
-  const nightButton = document.querySelector(
-    'button[onclick="toggleNight()"]'
-  );
+  const nightButton = document.querySelector('button[onclick="toggleNight()"]');
+  if (nightButton) nightButton.textContent = "🌙 Night mode";
 
-  if (nightButton) {
-    nightButton.textContent = "🌙 Night mode";
+  const lanternWish = $("lanternWish");
+  if (lanternWish) lanternWish.classList.remove("show");
+
+  const lanternButton = document.querySelector("#s6 .lantern-btn");
+  if (lanternButton) {
+    lanternButton.textContent = "Release Your Wish ✨";
+    lanternButton.disabled = false;
   }
 
-  // Go to first screen
   go(1);
 }
 
 /* START WEBSITE */
 document.addEventListener("DOMContentLoaded", () => {
-
   document.querySelectorAll(".screen").forEach(screen => {
     screen.classList.remove("active");
   });
 
   const firstScreen = $("s1");
-
-  if (firstScreen) {
-    firstScreen.classList.add("active");
-  }
+  if (firstScreen) firstScreen.classList.add("active");
 
   currentScreen = 1;
-
   startFloaties();
 
-  // Preload memory photos
   memories.forEach(memory => {
     const image = new Image();
     image.src = memory.image;
@@ -910,6 +658,7 @@ window.copyLetter = copyLetter;
 window.openGift = openGift;
 window.toggleNight = toggleNight;
 window.toggleMusic = toggleMusic;
+window.stopMusic = stopMusic;
 window.revealOrb = revealOrb;
 window.nextMemory = nextMemory;
 window.previousMemory = previousMemory;
@@ -919,17 +668,25 @@ window.openMysteryDoor = openMysteryDoor;
 window.revealSurprise = revealSurprise;
 window.grandFinale = grandFinale;
 window.restart = restart;
-function releaseWish() {
-  const wish = document.getElementById("lanternWish");
+window.releaseWish = releaseWish;
+window.revealChildhood = revealChildhood;
+/* TEDDY HUG INTERACTION 🧸 */
+function teddyHug() {
+    const teddy = document.querySelector(".teddy-picture img");
+    const message = document.getElementById("teddyMessage");
 
-  wish.classList.add("show");
+    if (!teddy || !message) return;
 
-  const button = document.querySelector("#s6 .lantern-btn");
-  button.textContent = "Wish Released 💗";
-  button.disabled = true;
+    teddy.classList.remove("teddy-hug");
+    void teddy.offsetWidth;
+    teddy.classList.add("teddy-hug");
 
-  document.querySelectorAll("#s6 .lantern").forEach((lantern, index) => {
-    lantern.style.animationDuration = (4 + index) + "s";
-    lantern.style.transform = "translateY(-80px)";
-  });
+    message.classList.remove("hidden");
+
+    confettiBurst(40);
+    hearts();
+
+    setTimeout(() => {
+        teddy.classList.remove("teddy-hug");
+    }, 900);
 }

@@ -32,10 +32,18 @@
       <div class="screen active" id="s1">
         <div class="eyebrow">Aaj ka din bhut special hai 🎀</div>
         <div class="hero">🧸💗</div>
+<h1 class="birthday-title">
+    <span class="birthday-line">HAPPY BIRTHDAYY,</span>
+    <em>ASHISHH!!</em>
+</h1>
+<div class="divider">♡ ✧ ♡</div>
+       <div class="teddy-picture" onclick="teddyHug()">
+    <img src="memories/teddy.jpg.jpeg" alt="Cute Birthday Teddy">
+</div>
 
-        <h1>HAPPY BIRTHDAYY,<br><em>ASHISHH!!</em></h1>
-        <div class="divider">♡ ✧ ♡</div>
-
+<p id="teddyMessage" class="hidden">
+    Sending you the biggest teddy hug! 🧸💗🤗
+</p>
         <p>
           Aaj ka din sirf smiles, surprises aur khushiyon ke naam! 🥳<br>
           Aapke liye ek chhota sa magic moment hai, I hope you enjoy it!
@@ -76,7 +84,6 @@
           <button class="btn" id="blowBtn" onclick="blowCandles()">Blow the candles 🌬️</button>
         </div>
 
-        <!-- This message appears after candles are blown -->
         <div id="birthdayReveal" class="hidden">
           <div class="reveal-characters">🧸🎂</div>
 
@@ -157,6 +164,17 @@
 
         <div class="letter-content hidden" id="letterContent">
           <div class="box">
+
+            <!-- PHOTO ABOVE THE LETTER -->
+            <div class="letter-photo-container">
+              <img
+                src="memories/photo.jpg.jpeg"
+                alt="A special memory"
+                class="letter-photo"
+                onerror="this.style.display='none'"
+              >
+            </div>
+
             <h2>Dear Birthdayy Boyy! 🌷</h2>
             <p class="message" id="letterText"></p>
           </div>
@@ -189,54 +207,59 @@
 
         <div class="buttons">
           <button class="btn light" onclick="go(3)">← Surprises</button>
-          <button class="btn" onclick="go(7)">Final surprise ✨</button>
+          <button class="btn" onclick="go(12)">Childhood Memory 🧸</button>
+          <button class="btn light" onclick="go(7)">Final surprise ✨</button>
         </div>
       </div>
 
       <!-- SCREEN 6: DREAMY NIGHT -->
       <section id="s6" class="screen">
-  <div class="lantern-world">
+        <div class="lantern-world">
 
-    <div class="lantern-stars">✦　·　✧　·　✦　·　✧</div>
+          <div class="lantern-stars">✦　·　✧　·　✦　·　✧</div>
 
-    <div class="lantern l1">🏮</div>
-    <div class="lantern l2">🏮</div>
-    <div class="lantern l3">🏮</div>
-    <div class="lantern l4">🏮</div>
-    <div class="lantern l5">🏮</div>
+          <div class="lantern l1">🏮</div>
+          <div class="lantern l2">🏮</div>
+          <div class="lantern l3">🏮</div>
+          <div class="lantern l4">🏮</div>
+          <div class="lantern l5">🏮</div>
 
-    <div class="lantern-content">
-      <div class="lantern-icon">🏮</div>
+          <div class="lantern-content">
+            <div class="lantern-icon">🏮</div>
 
-      <h1>Lantern of Wishes</h1>
+            <h1>Lantern of Wishes</h1>
 
-      <p class="lantern-subtitle">
-        Every lantern carries a little dream...
-      </p>
+            <p class="lantern-subtitle">
+              Every lantern carries a little dream...
+            </p>
 
-      <p class="lantern-description">
-        Somewhere between the stars and the sky,
-        there's a little place where wishes come true.
-      </p>
+            <p class="lantern-description">
+              Somewhere between the stars and the sky,
+              there's a little place where wishes come true.
+            </p>
 
-      <button class="btn lantern-btn" onclick="releaseWish()">
-        Release Your Wish ✨
-      </button>
+            <button class="btn lantern-btn" onclick="releaseWish()">
+              Release Your Wish ✨
+            </button>
 
-      <div id="lanternWish" class="lantern-wish">
-        May your life glow brighter than a thousand lanterns.
-        May every dream find its way to you,
-        and may happiness always follow your path. 💗
-      </div>
+            <div id="lanternWish" class="lantern-wish">
+              May your life glow brighter than a thousand lanterns.
+              May every dream find its way to you,
+              and may happiness always follow your path. 💗
+            </div>
 
-      <div class="buttons">
-        <button class="btn light" onclick="go(3)">
-          ← Back to surprises
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
+            <div class="buttons">
+              <button class="btn light" onclick="go(3)">
+                ← Back to surprises
+              </button>
+
+              <button class="btn" onclick="go(12)">
+                Childhood Memory 🧸
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!-- SCREEN 7: FINAL BIRTHDAY -->
       <div class="screen" id="s7">
@@ -252,20 +275,20 @@
         <h2>Aaj ki saari khushiyan aapke naam! 🌸</h2>
 
         <p class="final-message">
-         Janamdin ki bahut bahut badhai, Ashishh! 🎂❤️
-Dil se dua hai ki aane wala har din aapke liye kuch naya aur achha lekar aaye. Aapki life mein aise moments aayein 
-jinhe yaad karke aapke face par hamesha smile aa jaaye. Aapko life mein kabhi apni worth par doubt na ho
- aur aap hamesha khud par utna hi believe karo jitna aapke sapne aapse expect karte hain. 🥹✨
-Aap jo bhi achieve karna chahte ho, uske liye aapko right opportunities, patience aur courage mile.
- Kabhi kisi failure ki wajah se rukna mat, kyunki har cheez ka apna ek time hota hai. 
- Bas apne goals ke liye mehnat karte rehna aur khud ko kabhi underestimate mat karna. 🌷
-Aur ek baat, life kitni bhi busy ya complicated kyun na ho jaaye, apne liye waqt nikalna, 
-chhoti-chhoti khushiyon ko enjoy karna aur apni smile kabhi mat khona. Main bas yahi chahti hoon,
-ki aapke hisse mein kabhi aisi udaasi na aaye jisse aap apni khushiyan bhool jao. 🤍🫂
-I hope aapka ye birthday aapke liye sirf ek celebration nahi, balki ek beautiful beginning ho
- — ek aise saal ki jisme aapko woh sab mile jiske liye aapne kabhi chup-chaap wish kiya ho. 🧿💫
-Enjoy your day to the fullest, khoob saari smiles ke saath cake cut karna aur apna special day yaadgaar banana. 🎂🥳
-<strong>Once again, happiest birthday, Ashishh!</strong> Stay blessed, stay happy and keep shining. ❤️🌍
+          Janamdin ki bahut bahut badhai, Ashishh! 🎂❤️
+          Dil se dua hai ki aane wala har din aapke liye kuch naya aur achha lekar aaye. Aapki life mein aise moments aayein
+          jinhe yaad karke aapke face par hamesha smile aa jaaye. Aapko life mein kabhi apni worth par doubt na ho
+          aur aap hamesha khud par utna hi believe karo jitna aapke sapne aapse expect karte hain. 🥹✨
+          Aap jo bhi achieve karna chahte ho, uske liye aapko right opportunities, patience aur courage mile.
+          Kabhi kisi failure ki wajah se rukna mat, kyunki har cheez ka apna ek time hota hai.
+          Bas apne goals ke liye mehnat karte rehna aur khud ko kabhi underestimate mat karna. 🌷
+          Aur ek baat, life kitni bhi busy ya complicated kyun na ho jaaye, apne liye waqt nikalna,
+          chhoti-chhoti khushiyon ko enjoy karna aur apni smile kabhi mat khona. Main bas yahi chahti hoon,
+          ki aapke hisse mein kabhi aisi udaasi na aaye jisse aap apni khushiyan bhool jao. 🤍🫂
+          I hope aapka ye birthday aapke liye sirf ek celebration nahi, balki ek beautiful beginning ho
+          — ek aise saal ki jisme aapko woh sab mile jiske liye aapne kabhi chup-chaap wish kiya ho. 🧿💫
+          Enjoy your day to the fullest, khoob saari smiles ke saath cake cut karna aur apna special day yaadgaar banana. 🎂🥳
+          <strong>Once again, happiest birthday, Ashishh!</strong> Stay blessed, stay happy and keep shining. ❤️🌍
         </p>
 
         <div class="divider">🎀 ✨ 🎀</div>
@@ -295,7 +318,7 @@ Enjoy your day to the fullest, khoob saari smiles ke saath cake cut karna aur ap
           <p class="message">
             Aap jitna sochte ho, usse kahin zyada mere liyee special ho. 💗
             Aapki smile kabhi kam na ho, aapke dreams kabhi chhote na padein,
-            aur aapko har din khush rehne ki wajah mile.I wan aapko bo sb kuch mile jo aap chahte ho,sare dreams pure ho Happy Birthday! 🎂✨
+            aur aapko har din khush rehne ki wajah mile. I want aapko woh sab kuch mile jo aap chahte ho, saare dreams pure ho. Happy Birthday! 🎂✨
           </p>
         </div>
 
@@ -324,10 +347,10 @@ Enjoy your day to the fullest, khoob saari smiles ke saath cake cut karna aur ap
             <h3>You make the world brighter!</h3>
             <p>
               Happy Birthday to someone truly special! ❤️🎂
-You are one of those rare people who make life more beautiful just by being in it. May your day be filled with endless happiness, love, laughter, and unforgettable moments. May all your dreams come true, and may you always have a reason to smile.
-You deserve all the happiness in the world. Stay blessed, keep shining, and never stop being the wonderful person you are. ❤️✨
+              You are one of those rare people who make life more beautiful just by being in it. May your day be filled with endless happiness, love, laughter, and unforgettable moments. May all your dreams come true, and may you always have a reason to smile.
+              You deserve all the happiness in the world. Stay blessed, keep shining, and never stop being the wonderful person you are. ❤️✨
 
-Happy Birthday! You will always be special. 🥰
+              Happy Birthday! You will always be special. 🥰
             </p>
             <p class="surprise-signature">Sending you a big birthday hug ♡</p>
           </div>
@@ -361,11 +384,11 @@ Happy Birthday! You will always be special. 🥰
         <div class="reveal-panel" id="wishMessage">
           <h2>Your wish is on its way 💫</h2>
           <p class="message">
- Socho, agar aaj aasman ka taara aapke naam ek secret wish bhej sakta, toh shayad woh sab milkar bas ek hi baat kehte... ⭐
-Ki aapki zindagi mein kuch aise miracles hon jinka aapne kabhi imagine bhi na kiya ho. Kuch aise moments milen jo waqt ko wahi rok dene ka mann kare,
- kuch aise surprises jo bina maange mil jaayein, aur kuch aisi khushiyan jo kisi wajah ki mohtaaj na hon. 🌙
-Aaj ye constellation sirf stars se nahi, meri dher saari good wishes se bana hai. Aur iski sabse khoobsurat wish hai
- — may life always be kinder to you than you expect. 🥹💗
+            Socho, agar aaj aasman ka taara aapke naam ek secret wish bhej sakta, toh shayad woh sab milkar bas ek hi baat kehte... ⭐
+            Ki aapki zindagi mein kuch aise miracles hon jinka aapne kabhi imagine bhi na kiya ho. Kuch aise moments milen jo waqt ko wahi rok dene ka mann kare,
+            kuch aise surprises jo bina maange mil jaayein, aur kuch aisi khushiyan jo kisi wajah ki mohtaaj na hon. 🌙
+            Aaj ye constellation sirf stars se nahi, meri dher saari good wishes se bana hai. Aur iski sabse khoobsurat wish hai
+            — may life always be kinder to you than you expect. 🥹💗
           </p>
         </div>
 
@@ -397,18 +420,17 @@ Aaj ye constellation sirf stars se nahi, meri dher saari good wishes se bana hai
 
             Is duniya mein meri life mein aapki jagah koi nahi le sakta. Sach kahun toh mujhe khud bhi nahi pata ki what exactly is between us,
             but ek baat main dil se jaanti hoon ki jo bhi hai, it's really precious to me. 🫶🏻💗 Aap meri life mein bahut matter karte ho, shayad jitna main words mein explain bhi nahi kar sakti. 🥺❤️‍🩹
-           Aapki presence, aapse baatein karna, aapka hona… ye sab mere liye bahut special hai. Kabhi-kabhi kuch log dil ke bahut kareeb aa jaate hain,
-              aur aap mere liye unhi mein se ek ho.🦋✨Bas meri ek wish hai ki aap hamesha khush raho, aapki smile kabhi fade na ho,
-               aapki kindness kabhi kam na ho aur aapke saare dreams ek-ek karke poore hon. 🌸🤍 Life mein chahe kitni bhi difficulties aayein, 
-               aap kabhi khud par believe karna mat chhodna. You deserve all the love, happiness and success in this world. 🫂💫Aur haan, kabhi khud ko akela mat samajhna.
-                I genuinely wish ki aapki life mein hamesha achhe moments aayein, aapko har din muskurane ki koi wajah mile aur aapko woh sab kuch mile jo aapke dil ko sukoon de. 🥹🌷
-                Thank you for being you, for being a part of my life and for making some moments more beautiful without even realizing it. ❤️
-                I don't know what we are, and maybe I don't even need an answer right now… I just know that whatever this bond is, I never want to lose it. 🧿💗
-                           HAPPIEST BIRTHDAY, ASHISHHH!! 🎂🎉🥳
-May this year bring you endless happiness, unexpected surprises, beautiful memories, lots of success and everything your heart silently wishes for. 
-                         Keep smiling, keep shining and always stay the way you are. 🧸🎀
-                               You are, and will always remain, someone very special to me. ❤️🫶🏻🌍
-
+            Aapki presence, aapse baatein karna, aapka hona… ye sab mere liye bahut special hai. Kabhi-kabhi kuch log dil ke bahut kareeb aa jaate hain,
+            aur aap mere liye unhi mein se ek ho.🦋✨ Bas meri ek wish hai ki aap hamesha khush raho, aapki smile kabhi fade na ho,
+            aapki kindness kabhi kam na ho aur aapke saare dreams ek-ek karke poore hon. 🌸🤍 Life mein chahe kitni bhi difficulties aayein,
+            aap kabhi khud par believe karna mat chhodna. You deserve all the love, happiness and success in this world. 🫂💫 Aur haan, kabhi khud ko akela mat samajhna.
+            I genuinely wish ki aapki life mein hamesha achhe moments aayein, aapko har din muskurane ki koi wajah mile aur aapko woh sab kuch mile jo aapke dil ko sukoon de. 🥹🌷
+            Thank you for being you, for being a part of my life and for making some moments more beautiful without even realizing it. ❤️
+            I don't know what we are, and maybe I don't even need an answer right now… I just know that whatever this bond is, I never want to lose it. 🧿💗
+            HAPPIEST BIRTHDAY, ASHISHHH!! 🎂🎉🥳
+            May this year bring you endless happiness, unexpected surprises, beautiful memories, lots of success and everything your heart silently wishes for.
+            Keep smiling, keep shining and always stay the way you are. 🧸🎀
+            You are, and will always remain, someone very special to me. ❤️🫶🏻🌍
           </p>
           <button class="btn" onclick="go(7)">Celebrate the finale 🎉</button>
         </div>
@@ -417,6 +439,86 @@ May this year bring you endless happiness, unexpected surprises, beautiful memor
           <button class="btn light" onclick="go(3)">← Surprises</button>
         </div>
       </div>
+
+      
+<!-- SCREEN 12: CHILDHOOD MEMORY -->
+<div class="screen" id="s12">
+
+  <div class="eyebrow">🌸✨ A little journey through time ✨🌸</div>
+
+  <div class="hero">🚲🎨🍬🎀🎈</div>
+
+  <h1>Dear <em>Ash.... 💗</em></h1>
+
+  <p>
+    🌈 Before the dreams, the achievements and the grown-up version of you...
+    there was a little kid with a world full of imagination. 🥹🌻
+  </p>
+
+  <div class="childhood-card">
+
+    <div class="childhood-stamp">💌 A MEMORY FROM THE HEART ♡ 🌷</div>
+
+    <div class="childhood-icon">🎀🧸🌸</div>
+
+    <h2>✨ A little surprise is waiting! ✨</h2>
+
+    <p>
+      🥺 Ready to meet the cutest version of yourself?
+     
+    </p>
+
+    <button class="btn" onclick="revealChildhood()">
+      💝 Unlock my childhood memory 🎁
+    </button>
+
+    <div id="childhoodMemory" class="hidden">
+
+      <div class="letter-photo-container">
+        <img
+          src="memories/child.jpg.jpeg"
+          alt="A childhood memory"
+          class="letter-photo"
+        >
+      </div>
+
+      <h2>Look at this little cutiee! 🥹❤️‍🩹</h2>
+
+      <p>
+        🧸 Little hands, innocent smiles, tiny dreams
+        and countless beautiful memories... 🌈💗
+
+        Some things grow up, but the cutest memories
+        stay in our hearts forever. 🦋🌷✨
+      </p>
+
+      <div class="childhood-note">
+        💌 "I hope that little kid inside you never stops smiling." 🥹💖
+
+        <br>
+        🌻 Keep that innocence, keep that sparkle
+        and never stop being YOU! 🫶🏻✨
+      </div>
+
+      <div class="herooo!">🎂🎈🎊💗🦋</div>
+
+    </div>
+
+  </div>
+
+  <div class="buttons">
+    <button class="btn light" onclick="go(6)">
+      🏮 ← Lantern of Wishes
+    </button>
+
+    <button class="btn" onclick="go(7)">
+      Final Birthday ✨🎂
+    </button>
+  </div>
+
+  <p>🌙 Made with lots of love, smiles and little memories 💕🧿</p>
+
+</div>
 
     </section>
   </main>
