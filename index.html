@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Birthday Made of Magic 🎂</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="floaties" aria-hidden="true"></div>
+  <canvas id="confetti"></canvas>
+
+  <header class="topbar">
+    <div class="pill">✦ A LITTLE BIRTHDAY MAGIC ✦</div>
+
+    <div class="top-actions">
+      <button class="btn light small" id="musicBtn" onclick="toggleMusic()">♫ Play music</button>
+      <button class="btn light small" onclick="toggleNight()">🌙 Night mode</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+
+      <!-- SCREEN 1: HOME -->
+      <div class="screen active" id="s1">
+        <div class="eyebrow">Aaj ka din bhut special hai 🎀</div>
+        <div class="hero">🧸💗</div>
+
+        <h1>Happy Birthday,<br><em>Birthday Boyy!</em></h1>
+        <div class="divider">♡ ✧ ♡</div>
+
+        <p>
+          Aaj ka din sirf smiles, surprises aur khushiyon ke naam! 🥳<br>
+          Aapke liye ek chhota sa magic moment hai, I hope you enjoy it!
+        </p>
+
+        <div class="buttons">
+          <button class="btn" onclick="go(2)">Let's begin ✨</button>
+          <button class="btn light" onclick="hearts()">Send some love ♡</button>
+        </div>
+
+        <p class="tiny">Made with lots of lovee &amp; effort 💌</p>
+      </div>
+
+      <!-- SCREEN 2: CAKE -->
+      <div class="screen" id="s2">
+        <div class="eyebrow">The birthday cake 🎂</div>
+
+        <h1>Close your eyes &amp; <em>make a wish!</em></h1>
+
+        <p id="wishInstruction">Ek wish maango... phir candles blow karo. ✨</p>
+
+        <div id="cakeScene">
+          <div class="cake-stage">
+            <div class="cake">
+              <div class="plate"></div>
+              <div class="cake-bottom"></div>
+              <div class="cake-top"></div>
+              <div class="icing"></div>
+              <div class="candle c1"><div class="flame"></div></div>
+              <div class="candle c2"><div class="flame"></div></div>
+              <div class="candle c3"><div class="flame"></div></div>
+              <div class="sprinkles">✦ · ✦ · ✦</div>
+            </div>
+          </div>
+
+          <p id="candleHint">🕯️ Candles jal rahi hain... wish maango!</p>
+
+          <button class="btn" id="blowBtn" onclick="blowCandles()">Blow the candles 🌬️</button>
+        </div>
+
+        <!-- This message appears after candles are blown -->
+        <div id="birthdayReveal" class="hidden">
+          <div class="reveal-characters">🧸🎂</div>
+
+          <div class="reveal-title">HAPPY<br>BIRTHDAY!</div>
+
+          <div class="divider">✨ ♡ ✨</div>
+
+          <p class="message">
+            <strong>And just like that, a little wish was born… 🥹</strong>
+            <br><br>
+            May life turn it into something beautiful! 🦋✨
+          </p>
+
+          <div class="buttons">
+            <button class="btn" onclick="celebrate()">Let's Celebrate! 🎉</button>
+            <button class="btn light" onclick="go(3)">See surprises 💝</button>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="go(1)">← Home</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 3: SURPRISE OPTIONS -->
+      <div class="screen" id="s3">
+        <div class="eyebrow">Your special birthday corner 🌷</div>
+
+        <h1>Choose your <em>magic!</em></h1>
+        <p>Har surprise thoda sa special hai. 💗</p>
+
+        <div class="options">
+          <button class="option" onclick="go(8)">
+            <span>🔮</span>
+            <strong>The Hidden Reveal</strong>
+            <small>Tap the glowing orb</small>
+          </button>
+
+          <button class="option" onclick="go(9)">
+            <span>💌</span>
+            <strong>A Secret Surprise</strong>
+            <small>Open it... something special is waiting</small>
+          </button>
+
+          <button class="option" onclick="go(10)">
+            <span>⭐</span>
+            <strong>Make a Wish</strong>
+            <small>Connect the stars to make a wish</small>
+          </button>
+
+          <button class="option" onclick="go(11)">
+            <span>🚪</span>
+            <strong>The Final Secret</strong>
+            <small>Open the mystery door</small>
+          </button>
+        </div>
+
+        <div class="classic-links">
+          <p>More birthday magic 💌</p>
+          <button class="btn light small" onclick="go(4)">Secret Letter</button>
+          <button class="btn light small" onclick="go(5)">Mystery Gifts</button>
+          <button class="btn light small" onclick="go(6)">Dreamy Night</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 4: SECRET LETTER -->
+      <div class="screen" id="s4">
+        <div class="eyebrow">A little note for you 💌</div>
+
+        <h1>Open your <em>letter</em></h1>
+        <p>Envelope par click karo... andar ek special message hai.</p>
+
+        <button class="envelope-wrap" id="envelope" onclick="openLetter()" aria-label="Open birthday letter">
+          <span class="envelope-paper">For the Birthday Star ✨<br><br>With lots of good wishes...</span>
+          <span class="envelope-flap"></span>
+          <span class="envelope-seal">💗</span>
+        </button>
+
+        <div class="letter-content hidden" id="letterContent">
+          <div class="box">
+            <h2>Dear Birthday Boyy 🌷</h2>
+            <p class="message" id="letterText"></p>
+          </div>
+
+          <button class="btn light" onclick="copyLetter()">Copy this message ♡</button>
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="go(3)">← Surprises</button>
+          <button class="btn" onclick="go(7)">Final surprise ✨</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 5: MYSTERY GIFTS -->
+      <div class="screen" id="s5">
+        <div class="eyebrow">Unwrap some happiness 🎁</div>
+
+        <h1>Pick a <em>mystery gift!</em></h1>
+        <p>Har gift mein ek alag surprise hai. Sab open karke dekho!</p>
+
+        <div class="gifts">
+          <button class="gift" onclick="openGift(1)"><span>🎁</span><strong>Gift 1</strong></button>
+          <button class="gift" onclick="openGift(2)"><span>🎀</span><strong>Gift 2</strong></button>
+          <button class="gift" onclick="openGift(3)"><span>💝</span><strong>Gift 3</strong></button>
+        </div>
+
+        <div class="box" id="giftResult" aria-live="polite">
+          Ek gift select karo... andar kya hai? ✨
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="go(3)">← Surprises</button>
+          <button class="btn" onclick="go(7)">Final surprise ✨</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 6: DREAMY NIGHT -->
+      <section id="s6" class="screen">
+  <div class="lantern-world">
+
+    <div class="lantern-stars">✦　·　✧　·　✦　·　✧</div>
+
+    <div class="lantern l1">🏮</div>
+    <div class="lantern l2">🏮</div>
+    <div class="lantern l3">🏮</div>
+    <div class="lantern l4">🏮</div>
+    <div class="lantern l5">🏮</div>
+
+    <div class="lantern-content">
+      <div class="lantern-icon">🏮</div>
+
+      <h1>Lantern of Wishes</h1>
+
+      <p class="lantern-subtitle">
+        Every lantern carries a little dream...
+      </p>
+
+      <p class="lantern-description">
+        Somewhere between the stars and the sky,
+        there's a little place where wishes come true.
+      </p>
+
+      <button class="btn lantern-btn" onclick="releaseWish()">
+        Release Your Wish ✨
+      </button>
+
+      <div id="lanternWish" class="lantern-wish">
+        May your life glow brighter than a thousand lanterns.
+        May every dream find its way to you,
+        and may happiness always follow your path. 💗
+      </div>
+
+      <div class="buttons">
+        <button class="btn light" onclick="go(3)">
+          ← Back to surprises
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- SCREEN 7: FINAL BIRTHDAY -->
+      <div class="screen" id="s7">
+        <div class="eyebrow">One last thing... just for you 💗</div>
+
+        <div class="final-scene">
+          <div class="final-glow"></div>
+          <div class="final-emoji">🧸🎂</div>
+          <div class="reveal-title">HAPPY<br>BIRTHDAY!</div>
+        </div>
+
+        <div class="divider">✧ ♡ ✧</div>
+        <h2>Aaj ki saari khushiyan aapke naam! 🌸</h2>
+
+        <p class="final-message">
+         Janamdin ki bahut bahut badhai, Ashishh! 🎂❤️
+Dil se dua hai ki aane wala har din aapke liye kuch naya aur achha lekar aaye. Aapki life mein aise moments aayein 
+jinhe yaad karke aapke face par hamesha smile aa jaaye. Aapko life mein kabhi apni worth par doubt na ho
+ aur aap hamesha khud par utna hi believe karo jitna aapke sapne aapse expect karte hain. 🥹✨
+Aap jo bhi achieve karna chahte ho, uske liye aapko right opportunities, patience aur courage mile.
+ Kabhi kisi failure ki wajah se rukna mat, kyunki har cheez ka apna ek time hota hai. 
+ Bas apne goals ke liye mehnat karte rehna aur khud ko kabhi underestimate mat karna. 🌷
+Aur ek baat, life kitni bhi busy ya complicated kyun na ho jaaye, apne liye waqt nikalna, 
+chhoti-chhoti khushiyon ko enjoy karna aur apni smile kabhi mat khona. Main bas yahi chahti hoon,
+ki aapke hisse mein kabhi aisi udaasi na aaye jisse aap apni khushiyan bhool jao. 🤍🫂
+I hope aapka ye birthday aapke liye sirf ek celebration nahi, balki ek beautiful beginning ho
+ — ek aise saal ki jisme aapko woh sab mile jiske liye aapne kabhi chup-chaap wish kiya ho. 🧿💫
+Enjoy your day to the fullest, khoob saari smiles ke saath cake cut karna aur apna special day yaadgaar banana. 🎂🥳
+<strong>Once again, happiest birthday, Ashishh!</strong> Stay blessed, stay happy and keep shining. ❤️🌍
+        </p>
+
+        <div class="divider">🎀 ✨ 🎀</div>
+
+        <div class="buttons">
+          <button class="btn" onclick="grandFinale()">Make this moment magical ✨</button>
+          <button class="btn light" onclick="restart()">Relive the birthday ↺</button>
+        </div>
+
+        <div class="signature">Made with ♡, just for your special day.</div>
+      </div>
+
+      <!-- SCREEN 8: HIDDEN REVEAL -->
+      <div class="screen" id="s8">
+        <div class="eyebrow">Something magical is waiting ✨</div>
+
+        <h1>The Hidden <em>Reveal</em></h1>
+        <p>Glowing orb tap karo. Andar aapke liye ek wish chhupi hai. 💗</p>
+
+        <div class="surprise-stage">
+          <button class="magic-orb" onclick="revealOrb()" aria-label="Reveal birthday message"></button>
+          <p>Tap the orb to unlock your surprise</p>
+        </div>
+
+        <div class="reveal-panel" id="orbMessage">
+          <h2>A little reminder for you 🌷</h2>
+          <p class="message">
+            Aap jitna sochte ho, usse kahin zyada mere liyee special ho. 💗
+            Aapki smile kabhi kam na ho, aapke dreams kabhi chhote na padein,
+            aur aapko har din khush rehne ki wajah mile.I wan aapko bo sb kuch mile jo aap chahte ho,sare dreams pure ho Happy Birthday! 🎂✨
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="go(3)">← Surprises</button>
+          <button class="btn" onclick="go(9)">Next magic →</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 9: SECRET SURPRISE -->
+      <div class="screen" id="s9">
+        <div class="surprise-box">
+          <div class="surprise-icon">💌</div>
+
+          <h2>A Little Surprise for You</h2>
+          <p class="surprise-subtitle">A tiny reminder of how special you are ♡</p>
+
+          <button class="option surprise-button" id="surpriseButton" onclick="revealSurprise()">
+            <span>🎀</span>
+            <strong>Open Your Surprise</strong>
+            <small>Tap here to reveal it</small>
+          </button>
+
+          <div id="surpriseMessage" class="surprise-message hidden">
+            <div class="surprise-heart">💖</div>
+            <h3>You make the world brighter!</h3>
+            <p>
+              Happy Birthday to someone truly special! ❤️🎂
+You are one of those rare people who make life more beautiful just by being in it. May your day be filled with endless happiness, love, laughter, and unforgettable moments. May all your dreams come true, and may you always have a reason to smile.
+You deserve all the happiness in the world. Stay blessed, keep shining, and never stop being the wonderful person you are. ❤️✨
+
+Happy Birthday! You will always be special. 🥰
+            </p>
+            <p class="surprise-signature">Sending you a big birthday hug ♡</p>
+          </div>
+
+          <div class="buttons">
+            <button class="btn light" onclick="go(3)">← Back to the surprises</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCREEN 10: MAKE A WISH -->
+      <div class="screen" id="s10">
+        <div class="eyebrow">Connect the stars ⭐</div>
+
+        <h1>Make a <em>Wish</em></h1>
+
+        <div class="star-field" id="starField">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <polyline id="constellationLine" points="" fill="none" stroke="#ffe1f2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+
+          <button class="star-point" style="left:12%;top:80%" data-star="0" onclick="connectStar(0)" aria-label="Star 1">1</button>
+          <button class="star-point" style="left:50%;top:10%" data-star="1" onclick="connectStar(1)" aria-label="Star 2">2</button>
+          <button class="star-point" style="left:88%;top:80%" data-star="2" onclick="connectStar(2)" aria-label="Star 3">3</button>
+          <button class="star-point" style="left:69%;top:48%" data-star="3" onclick="connectStar(3)" aria-label="Star 4">4</button>
+          <button class="star-point" style="left:31%;top:48%" data-star="4" onclick="connectStar(4)" aria-label="Star 5">5</button>
+        </div>
+
+        <p id="starHint">0 / 5 stars connected ⭐</p>
+
+        <div class="reveal-panel" id="wishMessage">
+          <h2>Your wish is on its way 💫</h2>
+          <p class="message">
+ Socho, agar aaj aasman ka taara aapke naam ek secret wish bhej sakta, toh shayad woh sab milkar bas ek hi baat kehte... ⭐
+Ki aapki zindagi mein kuch aise miracles hon jinka aapne kabhi imagine bhi na kiya ho. Kuch aise moments milen jo waqt ko wahi rok dene ka mann kare,
+ kuch aise surprises jo bina maange mil jaayein, aur kuch aisi khushiyan jo kisi wajah ki mohtaaj na hon. 🌙
+Aaj ye constellation sirf stars se nahi, meri dher saari good wishes se bana hai. Aur iski sabse khoobsurat wish hai
+ — may life always be kinder to you than you expect. 🥹💗
+          </p>
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="resetStars()">Try again ↺</button>
+          <button class="btn light" onclick="go(3)">← Surprises</button>
+          <button class="btn" onclick="go(11)">Final secret →</button>
+        </div>
+      </div>
+
+      <!-- SCREEN 11: MYSTERY DOOR -->
+      <div class="screen" id="s11">
+        <div class="eyebrow">Behind this door is a message 💗</div>
+
+        <h1>The Final <em>Secret</em></h1>
+        <p>Darwaza kholo... aapke liye ek last surprise hai.</p>
+
+        <div class="door-scene">
+          <div class="door-light" id="doorLight"></div>
+          <button class="mystery-door" id="mysteryDoor" onclick="openMysteryDoor()" aria-label="Open mystery door"></button>
+        </div>
+
+        <p id="doorHint">Knock knock... who's there? 💗</p>
+
+        <div class="reveal-panel" id="doorMessage">
+          <h2>Someone very special — YOU! 💖</h2>
+          <p class="message">
+            Ashishh! ❤️🥹
+
+            Is duniya mein meri life mein aapki jagah koi nahi le sakta. Sach kahun toh mujhe khud bhi nahi pata ki what exactly is between us,
+            but ek baat main dil se jaanti hoon ki jo bhi hai, it's really precious to me. 🫶🏻💗 Aap meri life mein bahut matter karte ho, shayad jitna main words mein explain bhi nahi kar sakti. 🥺❤️‍🩹
+           Aapki presence, aapse baatein karna, aapka hona… ye sab mere liye bahut special hai. Kabhi-kabhi kuch log dil ke bahut kareeb aa jaate hain,
+              aur aap mere liye unhi mein se ek ho.🦋✨Bas meri ek wish hai ki aap hamesha khush raho, aapki smile kabhi fade na ho,
+               aapki kindness kabhi kam na ho aur aapke saare dreams ek-ek karke poore hon. 🌸🤍 Life mein chahe kitni bhi difficulties aayein, 
+               aap kabhi khud par believe karna mat chhodna. You deserve all the love, happiness and success in this world. 🫂💫Aur haan, kabhi khud ko akela mat samajhna.
+                I genuinely wish ki aapki life mein hamesha achhe moments aayein, aapko har din muskurane ki koi wajah mile aur aapko woh sab kuch mile jo aapke dil ko sukoon de. 🥹🌷
+                Thank you for being you, for being a part of my life and for making some moments more beautiful without even realizing it. ❤️
+                I don't know what we are, and maybe I don't even need an answer right now… I just know that whatever this bond is, I never want to lose it. 🧿💗
+                           HAPPIEST BIRTHDAY, ASHISHHH!! 🎂🎉🥳
+May this year bring you endless happiness, unexpected surprises, beautiful memories, lots of success and everything your heart silently wishes for. 
+                         Keep smiling, keep shining and always stay the way you are. 🧸🎀
+                               You are, and will always remain, someone very special to me. ❤️🫶🏻🌍
+
+          </p>
+          <button class="btn" onclick="go(7)">Celebrate the finale 🎉</button>
+        </div>
+
+        <div class="buttons">
+          <button class="btn light" onclick="go(3)">← Surprises</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>Made with ♡, just for your special day.</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
