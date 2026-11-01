@@ -1,7 +1,4 @@
 
-/* =====================================
-   BIRTHDAY WEBSITE - CORRECTED JAVASCRIPT
-   ===================================== */
 
 const $ = (id) => document.getElementById(id);
 
@@ -277,10 +274,10 @@ function blowCandles() {
 /* SECRET LETTER */
 const letterMessage =
   "Happy Birthday! 💗\n\n" +
-  "Aaj ke din bas itna yaad rakhna ki tum bahut special ho. " +
-  "Tumhari life pyaar, sukoon, achhe logon aur beautiful memories se bhari rahe.\n\n" +
-  "Har naya din tumhare liye ek nayi opportunity laaye. " +
-  "Tumhare dreams poore hon aur tumhari smile hamesha bani rahe.\n\n" +
+  "Aaj ke din bas itna yaad rakhna ki aap bahut special ho. " +
+  "aapki life pyaar, sukoon, achhe logon aur beautiful memories se bhari rahe.\n\n" +
+  "Har naya din aapke liye ek nayi opportunity laaye. " +
+  "aapke dreams poore hon aur aapki smile hamesha bani rahe.\n\n" +
   "Hamesha khush raho, apna khayal rakho aur apni special sparkle kabhi mat khona. 🌷\n\n" +
   "With lots of love and birthday wishes! 🎂✨";
 
