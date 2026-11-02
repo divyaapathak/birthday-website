@@ -10,7 +10,9 @@ let doorOpened = false;
 let floatyTimer = null;
 let currentMemory = 0;
 
-
+const birthdaySong = new Audio("./birthday.mp3.mp3");
+birthdaySong.loop = true;
+birthdaySong.volume = 0.5;
 async function toggleMusic() {
   const button = $("musicBtn");
 
