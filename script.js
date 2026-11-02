@@ -1,6 +1,5 @@
 
 const $ = (id) => document.getElementById(id);
-
 let currentScreen = 1;
 let candlesBlown = false;
 let letterOpened = false;
