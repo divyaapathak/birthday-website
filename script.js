@@ -1,4 +1,4 @@
-a
+
 const $ = (id) => document.getElementById(id);
 
 let currentScreen = 1;
