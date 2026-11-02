@@ -11,7 +11,7 @@ let floatyTimer = null;
 let currentMemory = 0;
 
 /* BIRTHDAY MUSIC */
-const birthdaySong = new Audio("music/birthday.mp3.mp3");
+const birthdaySong = new Audio("birthday.mp3.mp3");
 birthdaySong.loop = true;
 birthdaySong.volume = 0.5;
 
