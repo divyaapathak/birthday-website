@@ -1,5 +1,6 @@
 
 const $ = (id) => document.getElementById(id);
+
 let currentScreen = 1;
 let candlesBlown = false;
 let letterOpened = false;
@@ -9,36 +10,16 @@ let doorOpened = false;
 let floatyTimer = null;
 let currentMemory = 0;
 
-const birthdaySong = new Audio("./birthday.mp3.mp3");
+/* BIRTHDAY MUSIC */
+const birthdaySong = new Audio("birthday.mp3.mp3");
 birthdaySong.loop = true;
 birthdaySong.volume = 0.5;
-async function toggleMusic() {
+
+birthdaySong.addEventListener("ended", () => {
+  musicOn = false;
   const button = $("musicBtn");
-
-  if (musicOn) {
-    birthdaySong.pause();
-    musicOn = false;
-    if (button) button.textContent = "♫ Play music";
-    return;
-  }
-
-  try {
-    birthdaySong.load();
-    await birthdaySong.play();
-
-    musicOn = true;
-    if (button) button.textContent = "♫ Stop music";
-
-  } catch (error) {
-    console.error("Music error:", error);
-    musicOn = false;
-
-    if (button) button.textContent = "♫ Play music";
-
-    alert("Music play nahi ho raha. Please check the audio file.");
-  }
-}
-
+  if (button) button.textContent = "♫ Play music";
+});
 
 /* MEMORY PHOTOS */
 const memories = [
