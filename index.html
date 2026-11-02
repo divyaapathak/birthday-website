@@ -38,7 +38,7 @@
 </h1>
 <div class="divider">♡ ✧ ♡</div>
        <div class="teddy-picture" onclick="teddyHug()">
-    <img src="teddy.jpg.jpeg" alt="Cute Birthday Teddy">
+    <img src="memories/teddy.jpg.jpeg" alt="Cute Birthday Teddy">
 </div>
 
 <p id="teddyMessage" class="hidden">
@@ -141,6 +141,12 @@
           </button>
         </div>
 
+        <button class="option" onclick="go(13)">
+  <span>🎁</span>
+  <strong>The Gift Is Actually YOU</strong>
+  <small>Unlock your final mystery gift</small>
+</button>
+
         <div class="classic-links">
           <p>More birthday magic 💌</p>
           <button class="btn light small" onclick="go(4)">Secret Letter</button>
@@ -168,7 +174,7 @@
             <!-- PHOTO ABOVE THE LETTER -->
             <div class="letter-photo-container">
               <img
-                src="photo.jpg.jpeg"
+                src="memories/photo.jpg.jpeg"
                 alt="A special memory"
                 class="letter-photo"
                 onerror="this.style.display='none'"
@@ -476,7 +482,7 @@
 
       <div class="letter-photo-container">
         <img
-          src="child.jpg.jpeg"
+          src="memories/child.jpg.jpeg"
           alt="A childhood memory"
           class="letter-photo"
         >
@@ -519,6 +525,147 @@
   <p>🌙 Made with lots of love, smiles and little memories 💕🧿</p>
 
 </div>
+
+<!-- SCREEN 13: THE GIFT IS ACTUALLY YOU -->
+<div class="screen" id="s13">
+  <div class="eyebrow">✦ ONE LAST SECRET ✦</div>
+
+  <h1>The Gift Is <em>Actually YOU!</em></h1>
+
+  <p class="gift-intro">
+    You thought all the surprises were over?
+    There's one last magical gift waiting for you. 🥹💗
+  </p>
+
+  <div class="childhood-card gift-game-card">
+
+    <div class="gift-big-icon" id="bigGift">🎁</div>
+
+    <h2 id="giftHeading">A Mystery Gift Awaits!</h2>
+
+    <p id="giftDescription">
+      Some gifts are too special to be wrapped.
+      Are you ready to discover yours?
+    </p>
+
+    <button class="btn" id="startGiftButton" onclick="startGiftGame()">
+      Open Your Mystery Gift 🎀
+    </button>
+
+    <div id="giftGame" class="hidden">
+
+      <!-- LEVEL 1 -->
+      <div id="giftLevel1">
+        <h2>Level 1: Find the Magic Star ⭐</h2>
+        <p>One of these stars holds your next surprise!</p>
+
+        <div class="gift-choices">
+          <button class="gift-choice" onclick="giftLevelOne(1)">⭐</button>
+          <button class="gift-choice" onclick="giftLevelOne(2)">✨</button>
+          <button class="gift-choice" onclick="giftLevelOne(3)">🌟</button>
+        </div>
+      </div>
+
+      <!-- LEVEL 2 -->
+      <div id="giftLevel2" class="hidden">
+        <h2>Level 2: Unlock the Secret 💗</h2>
+        <p>What makes a gift truly special?</p>
+
+        <div class="gift-answer-list">
+          <button class="option" onclick="giftLevelTwo(1)">
+            Expensive things 💎
+          </button>
+
+          <button class="option" onclick="giftLevelTwo(2)">
+            Love and memories 💗
+          </button>
+
+          <button class="option" onclick="giftLevelTwo(3)">
+            Beautiful wrapping 🎀
+          </button>
+        </div>
+      </div>
+
+      <!-- LEVEL 3 -->
+      <div id="giftLevel3" class="hidden">
+        <h2>Level 3: One Last Door 🚪</h2>
+        <p>Tap the heart to unlock your final surprise.</p>
+
+        <button class="final-heart" onclick="openGiftFinal()">
+          💖
+        </button>
+      </div>
+
+      <!-- FINAL REVEAL -->
+      <div id="giftFinalReveal" class="hidden">
+
+        <div class="gift-final-animation">🎉💝🎊</div>
+
+        <h2>Surprise, Ashishh! 🥹❤️</h2>
+
+        <p class="gift-final-message">
+          The most special gift isn't something you unwrap...
+          <br><br>
+
+          It's the person you are. 💗
+
+          <br><br>
+
+          Your smile, your kindness, your dreams,
+          your little habits and everything that makes
+          you YOU...
+
+          <br><br>
+
+          You are already a gift to this world.
+          Never forget how special you are. 🧸✨
+
+          <br><br>
+
+          Happiest Birthday, Ashishh! 🎂❤️
+        </p>
+
+        <div class="gift-final-animation">🦋🌷💗✨</div>
+        <div class="photo-sparkles" aria-hidden="true">
+  <span>✨</span>
+  <span>💗</span>
+  <span>💖</span>
+  <span>💖</span>
+  <span>✨</span>
+  <span>💗</span>
+  <span>💗</span>
+</div>
+        <div class="ashish-photo-frame">
+  <img src="memories/ada.jpg.jpeg" alt="A special birthday memory">
+  <p>Someone who makes this world more beautiful ❤️</p>
+</div>
+
+        <button class="btn" onclick="celebrateGift()">
+          Celebrate This Moment 🎉
+        </button>
+      </div>
+
+      <div id="giftProgress" class="gift-progress">
+        LEVEL 0 / 3 UNLOCKED
+      </div>
+
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="btn light" onclick="go(12)">
+      ← Childhood Memory
+    </button>
+
+    <button class="btn" onclick="go(7)">
+      Final Birthday 🎂
+    </button>
+  </div>
+
+  <p class="tiny">A little surprise, made with lots of love. 💌</p>
+</div>
+
+
 
     </section>
   </main>

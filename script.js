@@ -11,7 +11,7 @@ let floatyTimer = null;
 let currentMemory = 0;
 
 /* BIRTHDAY MUSIC */
-const birthdaySong = new Audio("birthday.mp3.mp3");
+const birthdaySong = new Audio("music/birthday.mp3.mp3");
 birthdaySong.loop = true;
 birthdaySong.volume = 0.5;
 
@@ -354,7 +354,7 @@ function stopMusic() {
 }
 
 function playBirthdayChime() {
-  // No extra generated sound; birthday music is controlled by the music button.
+  // Birthday music is controlled by the music button.
 }
 
 /* HIDDEN ORB */
@@ -520,7 +520,7 @@ function releaseWish() {
   });
 }
 
-hearts();
+/* CHILDHOOD SURPRISE */
 function revealChildhood() {
   const memory = $("childhoodMemory");
   const button = document.querySelector('#s12 button[onclick="revealChildhood()"]');
@@ -537,6 +537,7 @@ function revealChildhood() {
   confettiBurst(120);
   hearts();
 }
+
 /* GRAND FINALE */
 function grandFinale() {
   confettiBurst(240);
@@ -548,6 +549,134 @@ function grandFinale() {
   if (button) {
     button.textContent = "You're loved! Happy Birthday 💗";
   }
+}
+
+/* SCREEN 13 - THE GIFT IS ACTUALLY YOU */
+let giftLevel = 0;
+let giftGameStarted = false;
+
+function startGiftGame() {
+  giftLevel = 0;
+  giftGameStarted = true;
+
+  const gift = $("bigGift");
+  const startButton = $("startGiftButton");
+
+  if (!gift || !startButton) return;
+
+  gift.classList.remove("gift-opening");
+  void gift.offsetWidth;
+  gift.classList.add("gift-opening");
+
+  startButton.disabled = true;
+
+  setTimeout(() => {
+    $("giftGame").classList.remove("hidden");
+    startButton.classList.add("hidden");
+
+    $("giftHeading").textContent = "Your Adventure Begins! 🎁";
+    $("giftDescription").textContent =
+      "Three little challenges stand between you and your surprise.";
+
+    $("giftLevel1").classList.remove("hidden");
+    $("giftLevel2").classList.add("hidden");
+    $("giftLevel3").classList.add("hidden");
+    $("giftFinalReveal").classList.add("hidden");
+
+    updateGiftProgress();
+  }, 1700);
+}
+
+function giftLevelOne(choice) {
+  if (!giftGameStarted || giftLevel !== 0) return;
+
+  if (choice === 2) {
+    giftLevel = 1;
+
+    $("giftLevel1").classList.add("hidden");
+    $("giftLevel2").classList.remove("hidden");
+
+    $("giftDescription").textContent =
+      "You found the magic star! One more challenge awaits. ⭐";
+
+    updateGiftProgress();
+    hearts();
+  } else {
+    $("giftDescription").textContent =
+      "Not this one! Try another magical star. ✨";
+  }
+}
+
+function giftLevelTwo(choice) {
+  if (!giftGameStarted || giftLevel !== 1) return;
+
+  if (choice === 2) {
+    giftLevel = 2;
+
+    $("giftLevel2").classList.add("hidden");
+    $("giftLevel3").classList.remove("hidden");
+
+    $("giftDescription").textContent =
+      "You understood the secret! One last surprise is waiting. 💗";
+
+    updateGiftProgress();
+    hearts();
+  } else {
+    $("giftDescription").textContent =
+      "Think about what makes memories unforgettable. Try again! 🥹";
+  }
+}
+
+function openGiftFinal() {
+  if (!giftGameStarted || giftLevel !== 2) return;
+
+  giftLevel = 3;
+
+  $("giftLevel3").classList.add("hidden");
+  $("giftFinalReveal").classList.remove("hidden");
+
+  $("giftHeading").textContent =
+    "THE GIFT IS ACTUALLY YOU! ❤️";
+
+  $("giftDescription").textContent =
+    "You unlocked every secret!";
+
+  updateGiftProgress();
+  celebrateGift();
+}
+
+function updateGiftProgress() {
+  const progress = $("giftProgress");
+
+  if (progress) {
+    progress.textContent = "LEVEL " + giftLevel + " / 3 UNLOCKED";
+  }
+}
+
+function celebrateGift() {
+  confettiBurst(120);
+  hearts();
+}
+
+/* TEDDY HUG INTERACTION */
+function teddyHug() {
+  const teddy = document.querySelector(".teddy-picture img");
+  const message = $("teddyMessage");
+
+  if (!teddy || !message) return;
+
+  teddy.classList.remove("teddy-hug");
+  void teddy.offsetWidth;
+  teddy.classList.add("teddy-hug");
+
+  message.classList.remove("hidden");
+
+  confettiBurst(40);
+  hearts();
+
+  setTimeout(() => {
+    teddy.classList.remove("teddy-hug");
+  }, 900);
 }
 
 /* RESTART WEBSITE */
@@ -596,6 +725,34 @@ function restart() {
   /* RESET CHILDHOOD SURPRISE */
   if ($("childhoodMemory")) {
     $("childhoodMemory").classList.add("hidden");
+  }
+
+  /* RESET SCREEN 13 GIFT GAME */
+  giftLevel = 0;
+  giftGameStarted = false;
+
+  if ($("giftGame")) $("giftGame").classList.add("hidden");
+  if ($("giftFinalReveal")) $("giftFinalReveal").classList.add("hidden");
+  if ($("giftLevel1")) $("giftLevel1").classList.remove("hidden");
+  if ($("giftLevel2")) $("giftLevel2").classList.add("hidden");
+  if ($("giftLevel3")) $("giftLevel3").classList.add("hidden");
+
+  if ($("bigGift")) {
+    $("bigGift").classList.remove("gift-opening");
+  }
+
+  if ($("startGiftButton")) {
+    $("startGiftButton").classList.remove("hidden");
+    $("startGiftButton").disabled = false;
+  }
+
+  if ($("giftHeading")) $("giftHeading").textContent = "A Mystery Gift Awaits!";
+  if ($("giftDescription")) {
+    $("giftDescription").textContent =
+      "Some gifts are too special to be wrapped. Are you ready to discover yours?";
+  }
+  if ($("giftProgress")) {
+    $("giftProgress").textContent = "LEVEL 0 / 3 UNLOCKED";
   }
 
   stopMusic();
@@ -670,23 +827,10 @@ window.grandFinale = grandFinale;
 window.restart = restart;
 window.releaseWish = releaseWish;
 window.revealChildhood = revealChildhood;
-/* TEDDY HUG INTERACTION 🧸 */
-function teddyHug() {
-    const teddy = document.querySelector(".teddy-picture img");
-    const message = document.getElementById("teddyMessage");
+window.teddyHug = teddyHug;
 
-    if (!teddy || !message) return;
-
-    teddy.classList.remove("teddy-hug");
-    void teddy.offsetWidth;
-    teddy.classList.add("teddy-hug");
-
-    message.classList.remove("hidden");
-
-    confettiBurst(40);
-    hearts();
-
-    setTimeout(() => {
-        teddy.classList.remove("teddy-hug");
-    }, 900);
-}
+window.startGiftGame = startGiftGame;
+window.giftLevelOne = giftLevelOne;
+window.giftLevelTwo = giftLevelTwo;
+window.openGiftFinal = openGiftFinal;
+window.celebrateGift = celebrateGift;
